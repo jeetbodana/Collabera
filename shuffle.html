@@ -1,0 +1,194 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Maersk | index</title>
+    <style>
+			@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,500');
+			/*font-family: 'Montserrat', sans-serif;*/
+
+			/* reset */
+			html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,kbd,q,s,samp,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td,article,aside,canvas,details,embed,figure,figcaption,footer,header,hgroup,menu,nav,output,ruby,section,summary,time,mark,audio,video{border:0;font-size:100%;font:inherit;vertical-align:baseline;margin:0;padding:0}
+			article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:none}
+			table{border-collapse:collapse;border-spacing:0}button::-moz-focus-inner, input[type="reset"]::-moz-focus-inner, input[type="button"]::-moz-focus-inner, input[type="submit"]::-moz-focus-inner,
+			input[type="file"] > input[type="button"]::-moz-focus-inner {border:0;padding:0;margin:0;}
+
+			/*main-style*/
+			.main-box {
+				width: 960px;
+				margin: 0 auto;
+				background: #efefef;
+				border-top: 5px solid #bdbdbd;
+			}
+			.items {
+				display: flex;
+				align-items: flex-start;
+			}
+			.cards-box {
+				width: 80%;
+				display: flex;
+				flex-wrap: wrap;
+			}
+			.cards-filter {
+				width: 20%;
+				text-align: center;
+			}
+			.card {
+				flex: 3 33.33%;
+				font-size: 100px;
+				color: #fff;
+				height: 200px;
+				align-items: center;
+				display: flex;
+				justify-content: center;
+			}
+			.clr1 {
+				background: #6f98a8;
+			}
+			.clr2 {
+				background: #2b8ead;
+			}
+			.clr3 {
+				background: #2f454e;
+			}
+			.clr4 {
+				background: #bfbfbf;
+			}
+			.btn-cta {
+				width: 80%;
+				background: #72c3dc;
+				color: #fff;
+				font-size: 15px;
+				padding: 12px;
+				text-transform: uppercase;
+				border-radius: 5px;
+				border: none;
+				margin-top: 15px;
+				margin-bottom: 15px;
+				cursor: pointer;
+				box-shadow: 0px 5px 0px 0px #368dac;
+			}
+			.btn-cta:focus,
+			.btn-cta:hover {
+				outline: none;
+			}
+			.title {
+				float: left;
+				width: 100%;
+				background: #efefef;
+				padding: 20px 0;
+				text-align: center;
+			}
+
+			/*responsiveness*/
+			@media (max-width: 980px) {
+				.main-box {
+					width: 100%;
+				}
+			}
+			@media (max-width: 575px) {
+				.card {
+					font-size: 60px;
+				}
+				.cards-box {
+					width: 70%;
+				}
+				.cards-filter {
+					width: 30%;
+				}
+			}
+			@media (max-width: 375px) {
+				.main-box {
+					background: #fff;
+				}
+				.items {
+					flex-direction: column-reverse;
+				}
+				.cards-box, .cards-filter {
+					width: 100%;
+				}
+				.btn-cta {
+					width: 90px;
+					font-size: 14px;
+				}
+				.card {
+				  font-size: 25px;
+				  flex: inherit;
+				  height: auto;
+				  display: block;
+				  width: 100%;
+				  text-align: center;
+				  background: #efefef;
+				  color: #000;
+				  padding: 10px;
+				  margin-bottom: 10px;
+				}
+				.clr1 {
+					border-left: 6px solid #6f98a8;
+				}
+				.clr2 {
+					border-left: 6px solid #2b8ead;
+				}
+				.clr3 {
+					border-left: 6px solid #2f454e;
+				}
+				.clr4 {
+					border-left: 6px solid #bfbfbf;
+				}
+
+			}
+    </style>
+	</head>
+	<body>
+		<div class="main-box">
+			<div class="items">
+				<div class="cards-box" id='cards'>
+				</div>
+				<div class="cards-filter">
+					<button type="button" class="btn btn-cta" id="shuffle">Shuffle</button>
+					<button type="button" class="btn btn-cta" id="sort">Sort</button>
+				</div>
+			</div>
+			<div class="title">
+				<h4>Shuffle and sort by Jitendra Bodana</h4>
+			</div>
+		</div>
+		<script type="text/javascript">
+			const defaultHTML = '<div class="card clr1">1</div><div class="card clr2">2</div><div class="card clr3">3</div><div class="card clr2">4</div><div class="card clr3">5</div><div class="card clr4">6</div><div class="card clr4">7</div><div class="card clr1">8</div><div class="card clr3">9</div>'
+			document.getElementById('cards').innerHTML = defaultHTML
+			function shuffle(elems) {
+ 
+			    allElems = (function(){
+				var ret = [], l = elems.length;
+				while (l--) { ret[ret.length] = elems[l]; }
+				return ret;
+			    })();
+			 
+			    var shuffled = (function(){
+			        var l = allElems.length, ret = [];
+			        while (l--) {
+			            var random = Math.floor(Math.random() * allElems.length),
+			                randEl = allElems[random].cloneNode(true);
+			            allElems.splice(random, 1);
+			            ret[ret.length] = randEl;
+			        }
+			        return ret; 
+			    })(), l = elems.length;
+			 
+			    while (l--) {
+			        elems[l].parentNode.insertBefore(shuffled[l], elems[l].nextSibling);
+			        elems[l].parentNode.removeChild(elems[l]);
+			    }
+			 
+			}
+			document.getElementById('sort').addEventListener("click", function(){
+				document.getElementById('cards').innerHTML = defaultHTML
+			});
+
+			document.getElementById('shuffle').addEventListener("click", function(){
+				shuffle(document.querySelectorAll('.card'))
+			});
+
+		</script>
+	</body>
+</html>
